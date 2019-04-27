@@ -28,6 +28,15 @@ class ContactController extends Controller
         return view('contact.register')->with(["error"=>false,"msj"=>""]);
     }
 
+    public function saveImg($file){
+        $name_file=time().'_'.$file->getClientOriginalName(); 
+        if(\Storage::disk('contacts')->put($name_file,file_get_contents($file->getRealPath()))){
+            return $name_file;
+        }else{
+            return false;
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -44,23 +53,31 @@ class ContactController extends Controller
             'phone'=>'required'
             ]);
             $objContact = new Contact();
+            $valid = true;
+            if(!empty($request->image)){         
+                $name_file=$this->saveImg($request->image);
+                if($name_file){
+                   $objContact->image=$name_file;
+                }else{
+                   $valid=false;
+                }
+           }
+
             $objContact->name = $request->name;
             $objContact->age = $request->age;
             $objContact->email = $request->email;
             $objContact->phone = $request->phone;
             $objContact->identy = $request->identity;
             $objContact->user_id = \Auth::user()->id;
-            if($objContact->save()){
-                return view("contact.register")->with(["error"=>false,"msj"=>"Guardado con exito"]);
+            if($valid){
+                if($objContact->save()){
+                    return view("contact.register")->with(["error"=>false,"msj"=>"Guardado con exito"]);
+                }
             }
+            
         } catch (\Throwable $th) {
             return view("contact.register")->with(["error"=>true,"msj"=>$th->getMessage()]);
         }
-        
-        
-        
-        
-
     }
 
     /**

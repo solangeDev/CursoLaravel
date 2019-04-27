@@ -50,7 +50,7 @@
                     </div>
                     <div class="form-group">
                         <div class="custom-file mt-3">
-                        <input type="file" class="custom-file-input" id="validatedCustomFile">
+                        <input type="file" name="image" class="custom-file-input" id="validatedCustomFile">
                         <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
                         <div class="invalid-feedback">Example invalid custom file feedback</div>
                         </div>
