@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contact;
 use Illuminate\Http\Request;
 use App\Http\Requests\ContactRequest;
 
@@ -24,7 +25,7 @@ class ContactController extends Controller
      */
     public function create()
     {
-        return view('contact.register');
+        return view('contact.register')->with(["error"=>false,"msj"=>""]);
     }
 
     /**
@@ -33,9 +34,33 @@ class ContactController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ContactRequest $request)
+    //ContactRequest
+    public function store(Request $request)
     {   
-        dd($request);
+        try {
+            $this->validate($request,[
+            'name'=>'required',
+            'email'=>'required|email',
+            'phone'=>'required'
+            ]);
+            $objContact = new Contact();
+            $objContact->name = $request->name;
+            $objContact->age = $request->age;
+            $objContact->email = $request->email;
+            $objContact->phone = $request->phone;
+            $objContact->identy = $request->identity;
+            $objContact->user_id = \Auth::user()->id;
+            if($objContact->save()){
+                return view("contact.register")->with(["error"=>false,"msj"=>"Guardado con exito"]);
+            }
+        } catch (\Throwable $th) {
+            return view("contact.register")->with(["error"=>true,"msj"=>$th->getMessage()]);
+        }
+        
+        
+        
+        
+
     }
 
     /**

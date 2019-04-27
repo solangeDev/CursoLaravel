@@ -6,6 +6,12 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Registrar Contacto</div>
+                @if($msj!="")
+                    <div class="alert {{$error?'alert-danger':'alert-success'}}" role="alert">
+                        {{$msj}}
+                    </div>
+                @endif
+                
                 <div class="card-body">
                 <form enctype="multipart/form-data" action="{{route('store')}}" method="POST">
                     <div class="form-group">
@@ -24,6 +30,10 @@
                     <div class="form-group">
                         <label for="phone">Phone</label>
                         <input type="text" name="phone" id="phone" class="form-control" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="num" name="age" id="age" class="form-control" placeholder="">
                     </div>
                     <label for="ident">Identity</label>
                     <div class="form-check">
