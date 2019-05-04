@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\ContactController;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $objControllerContact = new ContactController();
+        $data= $objControllerContact->index();
+        return view('home')->with(['contacts'=>$data]);
     }
 }

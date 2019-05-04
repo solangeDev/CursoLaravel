@@ -10,4 +10,9 @@ class Contact extends Model
         'id', 'name', 'email','phone', 'age', 'identy',
         'image','user_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contact;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\ContactRequest;
 
@@ -15,7 +16,19 @@ class ContactController extends Controller
      */
     public function index()
     {
-        //
+        $objContact = new Contact();
+        //forma 1 relationship eloquent 
+        $objUser =\Auth::user();
+        $data = $objUser->contacts()->get()->all();
+        return $data;  
+        //forma 2 query Builder
+        /*$objUser = new User(); 
+        $user_id = \Auth::user()->id;
+        $data = $objUser
+        ->where("contacts.user_id",$user_id)
+        ->join('contacts', 'users.id', '=', 'contacts.user_id')
+        ->select('contacts.*')
+        ->get();*/
     }
 
     /**
@@ -88,7 +101,7 @@ class ContactController extends Controller
      */
     public function show($id)
     {
-        //
+        dd($id);
     }
 
     /**
