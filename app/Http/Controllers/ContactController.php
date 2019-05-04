@@ -76,7 +76,7 @@ class ContactController extends Controller
                 }
             }
 
-            //$objContact->name = $request->name;
+            $objContact->name = $request->name;
             $objContact->age = $request->age;
             $objContact->email = $request->email;
             $objContact->phone = $request->phone;
