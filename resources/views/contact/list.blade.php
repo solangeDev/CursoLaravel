@@ -1,4 +1,5 @@
 
+    <a href="{{url('contacts/create')}}" class="btn btn-primary">Crear</a>
     <div class="row justify-content-center">
        <div class="col-12">
        <table class="table">

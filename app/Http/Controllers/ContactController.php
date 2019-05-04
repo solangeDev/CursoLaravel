@@ -38,7 +38,7 @@ class ContactController extends Controller
      */
     public function create()
     {
-        return view('contact.register')->with(["error"=>false,"msj"=>""]);
+        return view('contact.register')->with(["contact"=>null]);
     }
 
     public function saveImg($file){
@@ -74,9 +74,9 @@ class ContactController extends Controller
                 }else{
                    $valid=false;
                 }
-           }
+            }
 
-            $objContact->name = $request->name;
+            //$objContact->name = $request->name;
             $objContact->age = $request->age;
             $objContact->email = $request->email;
             $objContact->phone = $request->phone;
@@ -84,12 +84,16 @@ class ContactController extends Controller
             $objContact->user_id = \Auth::user()->id;
             if($valid){
                 if($objContact->save()){
-                    return view("contact.register")->with(["error"=>false,"msj"=>"Guardado con exito"]);
+                    \Session::flash("msj","Guardado con exito");
+                    \Session::flash("error",false);
+                    return redirect()->back();
                 }
             }
             
         } catch (\Throwable $th) {
-            return view("contact.register")->with(["error"=>true,"msj"=>$th->getMessage()]);
+            \Session::flash("msj",$th->getMessage());
+            \Session::flash("error",true);
+            return redirect()->back();
         }
     }
 
@@ -101,7 +105,10 @@ class ContactController extends Controller
      */
     public function show($id)
     {
-        dd($id);
+        $objContact = new Contact();
+        $data = $objContact->find($id);
+        return view('contact.register')->with(["contact"=>$data]);
+        
     }
 
     /**
@@ -115,6 +122,14 @@ class ContactController extends Controller
         //
     }
 
+    public function deleteImg($nombre_imagen){
+        if(\Storage::disk('contacts')->delete($nombre_imagen)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -124,7 +139,30 @@ class ContactController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $objContact = new Contact();
+        $objContact = $objContact::find($id);
+        if(!empty($objContact->image)){
+            $this->deleteImg($objContact->image);
+        }
+        $valid = true;
+        if(!empty($request->image)){         
+            $name_file=$this->saveImg($request->image);
+            if($name_file){
+                $objContact->image=$name_file;
+            }else{
+                $valid=false;
+            }
+        }
+        if($valid){
+            $objContact->name = $request->name;
+            $objContact->age = $request->age;
+            $objContact->email = $request->email;
+            $objContact->phone = $request->phone;
+            $objContact->identy = $request->identity;
+            if($objContact->save()){
+                dd("si lo hizo");
+            }
+        }
     }
 
     /**
