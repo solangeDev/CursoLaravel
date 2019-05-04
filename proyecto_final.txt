@@ -1,0 +1,17 @@
+Proyecto Final: 
+CRUD tema libre 
+Minimo 2 modelos (relacones entre modelos)
+middlewares
+enviar email 
+reporte pdf 
+
+Puntos para el video tutorial 
+- relaciones polimorficas (1) => Isnoret Marchan
+- pdf / emails (2) => Manuel Tovar
+- middleware and routhes (3) => Braian Jaimes
+- insert and update (save, query Builder) (4) => Raamses garcia
+- get and delete (save, query Builder) (5) => Luis garcia 
+- Api (try catch and protoclos http) (6) => Jorge Pinto
+- Policies (7)
+
+
