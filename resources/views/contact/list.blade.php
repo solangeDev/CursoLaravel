@@ -1,5 +1,6 @@
 
     <a href="{{url('contacts/create')}}" class="btn btn-primary">Crear</a>
+    <a href="{{url('contacts/pdf')}}" class="btn btn-warning">Reporte</a>
     @if(session()->get("msj")!="")
     <div class="alert {{session()->get("error")?'alert-danger':'alert-success'}}" role="alert">
         {{session()->get("msj")}}
