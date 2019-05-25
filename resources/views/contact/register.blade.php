@@ -68,7 +68,13 @@
                      <input type="hidden" name="_method" value="PUT">
                     @endif
                     <a href="{{url("/home")}}" class="btn btn-danger">Atras</a>
-                    <button type="submit" class="btn btn-primary">Enviar</button>
+                    @if(isset($contact))
+                        @can('update',$contact)
+                          <button type="submit" class="btn btn-success">Modificar</button>
+                        @endcan
+                      @else
+                           <button type="submit" class="btn btn-success">Guardar</button>
+                      @endif
                     </form>
                 </div>
             </div>

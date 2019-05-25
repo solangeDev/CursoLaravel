@@ -23,7 +23,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/contacts/pdf', 'PdfController@donwloadPdf')->name('pdf');
     
-    Route::get('/contacts/update/{id}', 'ContactController@show')->name('update')->middleware("checkage");
+    Route::get('/contacts/update/{id}', 'ContactController@show')->name('update');
+    //->middleware("checkage");
 
     Route::put('/contacts/update/{id}', 'ContactController@update')->name('updateform');
 

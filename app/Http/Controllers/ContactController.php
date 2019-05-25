@@ -119,6 +119,7 @@ class ContactController extends Controller
     {
         $objContact = new Contact();
         $data = $objContact->find($id);
+        //$this->authorize('update',$data);
         return view('contact.register')->with(["contact"=>$data]);
         
     }
