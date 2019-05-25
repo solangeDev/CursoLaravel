@@ -1,5 +1,10 @@
 
     <a href="{{url('contacts/create')}}" class="btn btn-primary">Crear</a>
+    @if(session()->get("msj")!="")
+    <div class="alert {{session()->get("error")?'alert-danger':'alert-success'}}" role="alert">
+        {{session()->get("msj")}}
+    </div>
+    @endif
     <div class="row justify-content-center">
        <div class="col-12">
        <table class="table">
@@ -24,7 +29,11 @@
                <td>{{$contact->phone}}</td>
                <td>
                   <a href="{{url('contacts/update/'.$contact->id)}}" class="btn btn-success btn-sm">Modificar</a>
-                  <button class="btn btn-danger btn-sm">Eliminar</button>
+                  <form method="post" action="{{route('deleteform',$contact->id)}}">
+                     @csrf
+                     <input type="hidden" name="_method" value="DELETE">
+                     <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                  </form>
                </td>
             </tr>
             @endforeach

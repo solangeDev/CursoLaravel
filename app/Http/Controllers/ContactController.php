@@ -173,6 +173,24 @@ class ContactController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        try {
+            $objContact = new Contact();
+            $objContact = $objContact::find($id);
+            if(!empty($objContact->image)){
+                $this->deleteImg($objContact->image);
+            }
+            if($objContact->delete()){
+                \Session::flash("msj","Eliminado con exito");
+                \Session::flash("error",false);
+                return redirect()->back();
+            }
+        } catch (\Throwable $th) {
+            \Session::flash("msj",$th->getMessage());
+            \Session::flash("error",true);
+            return redirect()->back();
+        }
+       
+        
     }
 }
