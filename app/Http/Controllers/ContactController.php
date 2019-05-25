@@ -173,7 +173,6 @@ class ContactController extends Controller
      */
     public function destroy($id)
     {
-        
         try {
             $objContact = new Contact();
             $objContact = $objContact::find($id);
@@ -181,9 +180,10 @@ class ContactController extends Controller
                 $this->deleteImg($objContact->image);
             }
             if($objContact->delete()){
-                \Session::flash("msj","Eliminado con exito");
+                /*\Session::flash("msj","Eliminado con exito");
                 \Session::flash("error",false);
-                return redirect()->back();
+                return redirect()->back();*/
+                return response()->json( [ 'msg'=>"El usuario fue liminado con exito", 'cod'=>"success" ],200);
             }
         } catch (\Throwable $th) {
             \Session::flash("msj",$th->getMessage());

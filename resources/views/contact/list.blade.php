@@ -29,11 +29,12 @@
                <td>{{$contact->phone}}</td>
                <td>
                   <a href="{{url('contacts/update/'.$contact->id)}}" class="btn btn-success btn-sm">Modificar</a>
-                  <form method="post" action="{{route('deleteform',$contact->id)}}">
+                  {{-- <form method="post" action="{{route('deleteform',$contact->id)}}">
                      @csrf
                      <input type="hidden" name="_method" value="DELETE">
                      <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                  </form>
+                  </form> --}}
+               <button type="button" class="btn btn-danger btn-sm btn-delete" contact="{{$contact->id}}">Eliminar</button>
                </td>
             </tr>
             @endforeach
@@ -41,3 +42,4 @@
          </table>
         </div>
     </div>
+    <script src="{{ asset('js/list.js') }}"></script>

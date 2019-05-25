@@ -25,7 +25,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::put('/contacts/update/{id}', 'ContactController@update')->name('updateform');
 
-    Route::delete('/contacts/delete/{id}', 'ContactController@destroy')->name('deleteform');
+    Route::delete('/contacts/delete/{id}', 'ContactController@destroy')->name('deleteform')->where('id','^[0-9]+$');
     
     Route::get('/contacts/create', 'ContactController@create')->name('create');
     Route::post('/contacts/create', 'ContactController@store')->name('store');
