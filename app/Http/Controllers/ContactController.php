@@ -186,9 +186,10 @@ class ContactController extends Controller
                 return response()->json( [ 'msg'=>"El usuario fue liminado con exito", 'cod'=>"success" ],200);
             }
         } catch (\Throwable $th) {
-            \Session::flash("msj",$th->getMessage());
+            /*\Session::flash("msj",$th->getMessage());
             \Session::flash("error",true);
-            return redirect()->back();
+            return redirect()->back();*/
+            return response()->json( [ 'msg'=>$th->getMessage(), 'cod'=>"error" ],500);
         }
        
         

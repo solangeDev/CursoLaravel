@@ -21,7 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
 
-    Route::get('/contacts/update/{id}', 'ContactController@show')->name('update');
+    Route::get('/contacts/update/{id}', 'ContactController@show')->name('update')->middleware("checkage");
 
     Route::put('/contacts/update/{id}', 'ContactController@update')->name('updateform');
 
