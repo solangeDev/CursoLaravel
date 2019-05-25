@@ -7,8 +7,18 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\ContactRequest;
 
+use Illuminate\Support\Facades\Mail;
+use \App\Mail\ContactMail;
+
+
 class ContactController extends Controller
 {
+    
+    public function sendMail($request){
+        $data=$request->all();
+        Mail::to($data["email"],$data["name"])->send(new ContactMail($data));
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -59,6 +69,7 @@ class ContactController extends Controller
     //ContactRequest
     public function store(Request $request)
     {   
+       
         try {
             $this->validate($request,[
             'name'=>'required',
@@ -84,6 +95,7 @@ class ContactController extends Controller
             $objContact->user_id = \Auth::user()->id;
             if($valid){
                 if($objContact->save()){
+                    $this->sendMail($request);
                     \Session::flash("msj","Guardado con exito");
                     \Session::flash("error",false);
                     return redirect()->back();
