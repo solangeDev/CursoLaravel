@@ -1,6 +1,7 @@
 Proyecto Final: 
 CRUD tema libre 
-Minimo 2 modelos (relacones entre modelos)
+23-06-2019
+Minimo 2 modelos (relaciones entre modelos)
 middlewares
 enviar email 
 reporte pdf 
@@ -13,5 +14,12 @@ Puntos para el video tutorial
 - get and delete (save, query Builder) (5) => Luis garcia 
 - Api (try catch and protoclos http) (6) => Jorge Pinto
 - Policies (7)
+
+
+Entrega 
+1. Slack link con tu repositorio (importante dato nombre_cedula)
+2. Grabar pantalla Presentacion Nombre Escuelaweb 
+bla bla bla min 2 
+Montar youtube y manda el link por slack 
 
 
